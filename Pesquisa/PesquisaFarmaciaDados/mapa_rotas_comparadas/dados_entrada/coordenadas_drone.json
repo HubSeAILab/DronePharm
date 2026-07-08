@@ -1,0 +1,192 @@
+{
+  "id": 86,
+  "drone_id": "DP-067",
+  "pedido_ids": [
+    40,
+    57,
+    42,
+    45,
+    43,
+    47,
+    44,
+    55,
+    54,
+    49,
+    51,
+    37,
+    50,
+    56,
+    52,
+    48,
+    41,
+    46,
+    53,
+    39
+  ],
+  "waypoints_json": [
+    {
+      "seq": 0,
+      "latitude": -19.9278,
+      "longitude": -43.9416,
+      "altitude": 1004,
+      "label": "Farmácia Popular Central - BH"
+    },
+    {
+      "seq": 1,
+      "latitude": -19.919483726154883,
+      "longitude": -43.93861527041835,
+      "altitude": 1004,
+      "label": "Pedido #40"
+    },
+    {
+      "seq": 2,
+      "latitude": -19.917620483165702,
+      "longitude": -43.939528170462815,
+      "altitude": 1004,
+      "label": "Pedido #57"
+    },
+    {
+      "seq": 3,
+      "latitude": -19.918264538170295,
+      "longitude": -43.94078261483592,
+      "altitude": 1004,
+      "label": "Pedido #42"
+    },
+    {
+      "seq": 4,
+      "latitude": -19.920578416382906,
+      "longitude": -43.94128637415821,
+      "altitude": 1004,
+      "label": "Pedido #45"
+    },
+    {
+      "seq": 5,
+      "latitude": -19.916835274609184,
+      "longitude": -43.94736182519045,
+      "altitude": 1004,
+      "label": "Pedido #43"
+    },
+    {
+      "seq": 6,
+      "latitude": -19.91486250736194,
+      "longitude": -43.94490517263814,
+      "altitude": 1004,
+      "label": "Pedido #47"
+    },
+    {
+      "seq": 7,
+      "latitude": -19.913427681540828,
+      "longitude": -43.942713508214695,
+      "altitude": 1004,
+      "label": "Pedido #44"
+    },
+    {
+      "seq": 8,
+      "latitude": -19.886731540286174,
+      "longitude": -43.92816473051842,
+      "altitude": 1004,
+      "label": "Pedido #55"
+    },
+    {
+      "seq": 9,
+      "latitude": -19.869284615730482,
+      "longitude": -43.96381725048194,
+      "altitude": 1004,
+      "label": "Pedido #54"
+    },
+    {
+      "seq": 10,
+      "latitude": -19.907451836204714,
+      "longitude": -43.97061845293018,
+      "altitude": 1004,
+      "label": "Pedido #49"
+    },
+    {
+      "seq": 11,
+      "latitude": -19.92273815460728,
+      "longitude": -43.96714028571964,
+      "altitude": 1004,
+      "label": "Pedido #51"
+    },
+    {
+      "seq": 12,
+      "latitude": -19.924546633388367,
+      "longitude": -43.99145769577137,
+      "altitude": 1004,
+      "label": "Pedido #37"
+    },
+    {
+      "seq": 13,
+      "latitude": -19.936170452819365,
+      "longitude": -43.97728361502486,
+      "altitude": 1004,
+      "label": "Pedido #50"
+    },
+    {
+      "seq": 14,
+      "latitude": -19.95718360471583,
+      "longitude": -43.96537284061593,
+      "altitude": 1004,
+      "label": "Pedido #56"
+    },
+    {
+      "seq": 15,
+      "latitude": -19.952641380274915,
+      "longitude": -43.938174620583716,
+      "altitude": 1004,
+      "label": "Pedido #52"
+    },
+    {
+      "seq": 16,
+      "latitude": -19.941386205718462,
+      "longitude": -43.95127460831573,
+      "altitude": 1004,
+      "label": "Pedido #48"
+    },
+    {
+      "seq": 17,
+      "latitude": -19.932874165308743,
+      "longitude": -43.944128536709215,
+      "altitude": 1004,
+      "label": "Pedido #41"
+    },
+    {
+      "seq": 18,
+      "latitude": -19.935682174509317,
+      "longitude": -43.92751483620547,
+      "altitude": 1004,
+      "label": "Pedido #46"
+    },
+    {
+      "seq": 19,
+      "latitude": -19.930482715603947,
+      "longitude": -43.92173518462057,
+      "altitude": 1004,
+      "label": "Pedido #53"
+    },
+    {
+      "seq": 20,
+      "latitude": -19.92405738124567,
+      "longitude": -43.935237184562915,
+      "altitude": 1004,
+      "label": "Pedido #39"
+    },
+    {
+      "seq": 21,
+      "latitude": -19.9278,
+      "longitude": -43.9416,
+      "altitude": 1004,
+      "label": "Farmácia Popular Central - BH"
+    }
+  ],
+  "distancia_km": 34.6513,
+  "tempo_min": 67.75,
+  "energia_wh": 895.56,
+  "carga_kg": 4.82,
+  "custo": 7.4373488303617235,
+  "viavel": true,
+  "geracoes_ga": 0,
+  "status": "calculada",
+  "criada_em": "2026-06-11T23:45:50.746086",
+  "concluida_em": null
+}

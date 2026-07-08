@@ -1,0 +1,65 @@
+{
+  "drone": {
+    "parametros_fisicos_e_operacionais": {
+      "capacidade_max_kg": {
+        "valor": 4.0,
+        "unidade": "kg",
+        "descricao": "Carga máxima transportável"
+      },
+      "autonomia_max_km": {
+        "valor": 10.0,
+        "unidade": "km",
+        "descricao": "Alcance máximo com bateria cheia"
+      },
+      "velocidade_ms": {
+        "valor": 10.0,
+        "unidade": "m/s",
+        "descricao": "Velocidade de cruzeiro"
+      },
+      "velocidade_kmh": {
+        "valor": 36.0,
+        "unidade": "km/h",
+        "descricao": "Velocidade de cruzeiro convertida"
+      },
+      "tempo_pouso_s": {
+        "valor": 30,
+        "unidade": "s",
+        "descricao": "Tempo de pouso/decolagem por waypoint"
+      },
+      "altitude_voo_m": {
+        "valor": 50.0,
+        "unidade": "m",
+        "descricao": "Altitude padrão de voo"
+      },
+      "bateria_minima": {
+        "valor": 0.20,
+        "unidade": "percentual",
+        "descricao": "Limiar de retorno de emergência (20%)"
+      },
+      "consumo_base_wh_km": {
+        "valor": 15.0,
+        "unidade": "Wh/km",
+        "descricao": "Consumo base sem carga"
+      },
+      "margem_carga": {
+        "valor": 0.10,
+        "unidade": "percentual",
+        "descricao": "Margem de segurança de carga (10%)"
+      }
+    }
+  },
+  "vento": {
+    "limites_operacionais": {
+      "vento_max_operacional_ms": {
+        "valor": 12.0,
+        "unidade": "m/s",
+        "descricao": "Velocidade máxima de vento para operar"
+      },
+      "vento_fator_por_ms": {
+        "valor": 0.08,
+        "unidade": "fator",
+        "descricao": "Aumento de consumo por m/s acima de 5 m/s"
+      }
+    }
+  }
+}

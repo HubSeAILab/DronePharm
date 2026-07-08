@@ -1,0 +1,8 @@
+# Local Python virtual environments
+Pesquisa/venv/
+venv/
+.venv/
+
+# Python bytecode caches
+__pycache__/
+*.pyc

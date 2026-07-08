@@ -1,0 +1,27 @@
+{
+  "urban_distance_km": 65.603,
+  "urban_minutes": 108.82,
+  "urban_total_minutes": 168.81,
+  "drone_distance_km": 34.6513,
+  "drone_minutes": 67.75,
+  "drone_energy_wh": 895.56,
+  "drone_payload_kg": 4.82,
+  "drone_viable": true,
+  "distance_reduction_km": 30.951699999999995,
+  "distance_reduction_percent": 47.18031187598128,
+  "urban_base": {
+    "point_id": "base",
+    "label": "AG FARMA LTDA - ME",
+    "street": "RIO DE JANEIRO",
+    "latitude": -19.9162884,
+    "longitude": -43.9378304,
+    "kind": "base"
+  },
+  "drone_base": {
+    "seq": 0,
+    "latitude": -19.9278,
+    "longitude": -43.9416,
+    "altitude": 1004,
+    "label": "Farmácia Popular Central - BH"
+  }
+}
