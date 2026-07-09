@@ -2,7 +2,7 @@
 
 This script does not recalculate routes. It reuses existing results:
 - dados_entrada/relatorio_rota_urbana.json
-- dados_entrada/coordenadas_drone.json
+- experimental_setup/coordenadas.json
 
 Generated outputs:
 - saida/mapa_drone_urbano.html
@@ -332,9 +332,10 @@ def build_map(urban_result: dict[str, Any], drone_data: dict[str, Any], output_h
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments that configure inputs, outputs, and routing behavior."""
     base_dir = Path(__file__).resolve().parent
+    project_root = base_dir.parent.parent
     parser = argparse.ArgumentParser(description="Generates a comparative map for the urban route and drone route.")
     parser.add_argument("--urbana", type=Path, default=base_dir / "dados_entrada" / "relatorio_rota_urbana.json")
-    parser.add_argument("--drone", type=Path, default=base_dir / "dados_entrada" / "coordenadas_drone.json")
+    parser.add_argument("--drone", type=Path, default=project_root / "experimental_setup" / "coordenadas.json")
     parser.add_argument("--saida", type=Path, default=base_dir / "saida")
     return parser.parse_args()
 

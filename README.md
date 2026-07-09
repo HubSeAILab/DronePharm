@@ -44,25 +44,25 @@ The repository includes:
 | Estimated urban fuel cost | R$ 40.67 |
 | Estimated urban emissions | 15.154 kg CO2 |
 
-Summary source: [`resumo_comparativo.json`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/saida/resumo_comparativo.json)
+Summary source: [`resumo_comparativo.json`](experimental_setup/output/resumo_comparativo.json)
 
 ---
 
 ## Data Sources
 
 Pharmacies were registered from data obtained on the Brazilian Federal Government website. The spreadsheets downloaded per municipality are located at:
-[`downloads_farmacias/`](Pesquisa/PesquisaFarmaciaDados/data/pharms/downloads_farmacias/)
+[`downloads_farmacias/`](data/scripts/downloads_farmacias/)
 
 ### Files Derived from Pharmacy Data
 
 | File | Content |
 | --- | --- |
-| [`consolidado_farmacias.xlsx`](Pesquisa/PesquisaFarmaciaDados/data/pharms/consolidado_farmacias.xlsx) | Consolidated spreadsheet of pharmacies by municipality |
-| [`farmacias_com_coordenadas.xlsx`](Pesquisa/PesquisaFarmaciaDados/data/pharms/farmacias_com_coordenadas.xlsx) | Pharmacies with latitude and longitude |
-| [`dados_com_coordenadas(Sheet1).csv`](Pesquisa/PesquisaFarmaciaDados/dados_com_coordenadas%28Sheet1%29.csv) | CSV base used in the route scripts |
-| [`farmacias_processadas.csv`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/farmacias_processadas.csv) | Pharmacies filtered for the experiment |
+| [`consolidado_farmacias.xlsx`](data/scripts/consolidado_farmacias.xlsx) | Consolidated spreadsheet of pharmacies by municipality |
+| [`farmacias_com_coordenadas.xlsx`](data/scripts/farmacias_com_coordenadas.xlsx) | Pharmacies with latitude and longitude |
+| [`dados_com_coordenadas.csv`](data/dados_com_coordenadas.csv) | CSV base used in the route scripts |
+| [`farmacias_processadas.csv`](data/scripts/saida_rotas/farmacias_processadas.csv) | Pharmacies filtered for the experiment |
 
-Orders used in the scenario: [`pedidos_belo_horizonte.csv`](Pesquisa/PesquisaFarmaciaDados/pedidos_belo_horizonte.csv)
+Orders used in the scenario: [`pedidos_belo_horizonte.csv`](data/pedidos_belo_horizonte.csv)
 
 > **OpenStreetMap** was used to geocode addresses, display base maps, and trace ground routes over the road network. Ground route queries were performed via **OSRM**.
 
@@ -72,14 +72,14 @@ Orders used in the scenario: [`pedidos_belo_horizonte.csv`](Pesquisa/PesquisaFar
 
 | File | Function |
 | --- | --- |
-| [`pharms.py`](Pesquisa/PesquisaFarmaciaDados/data/pharms/pharms.py) | Consolidates pharmacy spreadsheets downloaded per municipality |
-| [`cords.py`](Pesquisa/PesquisaFarmaciaDados/data/pharms/cords.py) | Geocodes pharmacies using Nominatim/OpenStreetMap |
-| [`gerar_rotas_farmacias.py`](Pesquisa/PesquisaFarmaciaDados/gerar_rotas_farmacias.py) | Generates routes between pharmacies and orders, exporting JSON, GeoJSON, and HTML |
-| [`gerar_transporte_urbano.py`](Pesquisa/PesquisaFarmaciaDados/gerar_transporte_urbano.py) | Calculates the urban route with the OSRM Trip API and generates maps/reports |
-| [`plot_rota.py`](Pesquisa/PesquisaFarmaciaDados/data/plot_rota.py) | Generates drone route maps in different layers |
-| [`relatorio_telemetria.py`](Pesquisa/PesquisaFarmaciaDados/data/experimental_setup/relatorio_telemetria.py) | Generates a PDF telemetry report for the drone route |
-| [`gerar_mapa_comparativo.py`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/gerar_mapa_comparativo.py) | Generates a map and GeoJSON comparing the urban route and the drone route |
-| [`codigos_reaproveitados/`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/codigos_reaproveitados/) | Scripts reused as a reference for the comparison |
+| [`pharms.py`](data/scripts/pharms.py) | Consolidates pharmacy spreadsheets downloaded per municipality |
+| [`cords.py`](data/scripts/cords.py) | Geocodes pharmacies using Nominatim/OpenStreetMap |
+| [`gerar_rotas_farmacias.py`](data/scripts/gerar_rotas_farmacias.py) | Generates routes between pharmacies and orders, exporting JSON, GeoJSON, and HTML |
+| [`gerar_transporte_urbano.py`](maps/scripts/gerar_transporte_urbano.py) | Calculates the urban route with the OSRM Trip API and generates maps/reports |
+| [`plot_rota.py`](experimental_setup/scripts/plot_rota.py) | Generates drone route maps in different layers |
+| [`relatorio_telemetria.py`](experimental_setup/scripts/relatorio_telemetria.py) | Generates a PDF telemetry report for the drone route |
+| [`gerar_mapa_comparativo.py`](maps/scripts/gerar_mapa_comparativo.py) | Generates a map and GeoJSON comparing the urban route and the drone route |
+| [`maps/`](maps/) | Comparative maps, drone flight paths, ground vehicle maps, and order maps |
 
 ---
 
@@ -87,14 +87,14 @@ Orders used in the scenario: [`pedidos_belo_horizonte.csv`](Pesquisa/PesquisaFar
 
 ### Pharmacy-to-Order Routes
 
-Folder: [`saida_rotas_pedidos/`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/)
+Folder: [`data/scripts/saida_rotas/`](data/scripts/saida_rotas/)
 
 | File | Content |
 | --- | --- |
-| [`rotas_farmacias.json`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/rotas_farmacias.json) | Complete data of routes between pharmacies and orders |
-| [`rotas_farmacias.geojson`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/rotas_farmacias.geojson) | Geometries in GIS format |
-| [`rotas_farmacias_mapa.html`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/rotas_farmacias_mapa.html) | Interactive map |
-| [`farmacias_processadas.csv`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/farmacias_processadas.csv) | Pharmacies used in the generation |
+| [`rotas_farmacias.json`](data/scripts/saida_rotas/rotas_farmacias.json) | Complete data of routes between pharmacies and orders |
+| [`rotas_farmacias.geojson`](data/scripts/saida_rotas/rotas_farmacias.geojson) | Geometries in GIS format |
+| [`rotas_farmacias_mapa.html`](data/scripts/saida_rotas/rotas_farmacias_mapa.html) | Interactive map |
+| [`farmacias_processadas.csv`](data/scripts/saida_rotas/farmacias_processadas.csv) | Pharmacies used in the generation |
 
 **Summary of the 5 selected pharmacies**
 
@@ -110,17 +110,17 @@ Folder: [`saida_rotas_pedidos/`](Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedi
 
 ### Urban Transport
 
-Folder: [`saida_transporte_urbano/`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/)
+Folder: [`experimental_setup/input/`](experimental_setup/input/)
 
 | File | Content |
 | --- | --- |
-| [`relatorio_rota_urbana.json`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/relatorio_rota_urbana.json) | Metrics, stops, legs, and geometry of the urban route |
-| [`rota_urbana.geojson`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/rota_urbana.geojson) | Urban route geometry |
-| [`relatorio_transporte_urbano.pdf`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/relatorio_transporte_urbano.pdf) | Executive report |
-| [`mapa_terrestre_osm.html`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/mapa_terrestre_osm.html) | Map with OpenStreetMap layer |
-| [`mapa_terrestre_claro.html`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/mapa_terrestre_claro.html) | Map with light layer |
-| [`mapa_terrestre_ruas.html`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/mapa_terrestre_ruas.html) | Map with street layer |
-| [`mapa_terrestre_satelite.html`](Pesquisa/PesquisaFarmaciaDados/saida_transporte_urbano/mapa_terrestre_satelite.html) | Map with satellite layer |
+| [`relatorio_rota_urbana.json`](experimental_setup/input/relatorio_rota_urbana.json) | Metrics, stops, legs, and geometry of the urban route |
+| [`rota_urbana.geojson`](experimental_setup/input/rota_urbana.geojson) | Urban route geometry |
+| [`relatorio_transporte_urbano.md`](experimental_setup/reports/relatorio_transporte_urbano.md) | Executive report |
+| [`mapa_terrestre_osm.html`](maps/ground_vehicle_route/mapa_terrestre_osm.html) | Map with OpenStreetMap layer |
+| [`mapa_terrestre_claro.html`](maps/ground_vehicle_route/mapa_terrestre_claro.html) | Map with light layer |
+| [`mapa_terrestre_ruas.html`](maps/ground_vehicle_route/mapa_terrestre_ruas.html) | Map with street layer |
+| [`mapa_terrestre_satelite.html`](maps/ground_vehicle_route/mapa_terrestre_satelite.html) | Map with satellite layer |
 
 **Urban Base**
 
@@ -178,14 +178,14 @@ Folder: [`saida_transporte_urbano/`](Pesquisa/PesquisaFarmaciaDados/saida_transp
 
 | File | Content |
 | --- | --- |
-| [`coordenadas.json`](Pesquisa/PesquisaFarmaciaDados/data/experimental_setup/coordenadas.json) | Waypoints, payload, energy, cost, and feasibility |
-| [`relatorio_telemetria_rota.pdf`](Pesquisa/PesquisaFarmaciaDados/data/experimental_setup/relatorio_telemetria_rota.pdf) | Telemetry report |
-| [`rota_drone_openstreetmap.html`](Pesquisa/PesquisaFarmaciaDados/data/rota_drone_openstreetmap.html) | Map with OpenStreetMap |
-| [`rota_drone_satelite_esri.html`](Pesquisa/PesquisaFarmaciaDados/data/rota_drone_satelite_esri.html) | Map with satellite view |
-| [`rota_drone_cartodb_positron.html`](Pesquisa/PesquisaFarmaciaDados/data/rota_drone_cartodb_positron.html) | Map with CartoDB Positron |
-| [`rota_drone_cartodb_voyager.html`](Pesquisa/PesquisaFarmaciaDados/data/rota_drone_cartodb_voyager.html) | Map with CartoDB Voyager |
-| [`rota_drone_mapas.pdf`](Pesquisa/PesquisaFarmaciaDados/data/rota_drone_mapas.pdf) | Route maps in PDF |
-| [`rotasDrone/`](Pesquisa/PesquisaFarmaciaDados/rotasDrone/) | Copies of the PDF reports and maps |
+| [`coordenadas.json`](experimental_setup/input/coordenadas.json) | Waypoints, payload, energy, cost, and feasibility |
+| [`relatorio_telemetria_rota.md`](experimental_setup/reports/relatorio_telemetria_rota.md) | Telemetry report |
+| [`rota_drone_openstreetmap.html`](maps/drone_flight_path/rota_drone_openstreetmap.html) | Map with OpenStreetMap |
+| [`rota_drone_satelite_esri.html`](maps/drone_flight_path/rota_drone_satelite_esri.html) | Map with satellite view |
+| [`rota_drone_cartodb_positron.html`](maps/drone_flight_path/rota_drone_cartodb_positron.html) | Map with CartoDB Positron |
+| [`rota_drone_cartodb_voyager.html`](maps/drone_flight_path/rota_drone_cartodb_voyager.html) | Map with CartoDB Voyager |
+| [`rota_drone_mapas.pdf`](experimental_setup/scripts/rota_drone_mapas.pdf) | Route maps in PDF |
+| [`maps/drone_flight_path/`](maps/drone_flight_path/) | Copies of the drone route maps |
 
 **Drone Route Metrics**
 
@@ -232,16 +232,16 @@ Folder: [`saida_transporte_urbano/`](Pesquisa/PesquisaFarmaciaDados/saida_transp
 
 ### Comparative Map
 
-Folder: [`mapa_rotas_comparadas/`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/)
+Folder: [`maps/comparative/`](maps/comparative/)
 
 | File | Content |
 | --- | --- |
-| [`mapa_drone_urbano.html`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/saida/mapa_drone_urbano.html) | Single map comparing the urban route and the drone route |
-| [`rotas_drone_urbano.geojson`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/saida/rotas_drone_urbano.geojson) | Geometries of both routes and points |
-| [`resumo_comparativo.json`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/saida/resumo_comparativo.json) | Final comparison metrics |
-| [`relatorio_rota_urbana.json`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/dados_entrada/relatorio_rota_urbana.json) | Urban input used in the comparison |
-| [`rota_urbana.geojson`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/dados_entrada/rota_urbana.geojson) | Urban geometry used in the comparison |
-| [`coordenadas_drone.json`](Pesquisa/PesquisaFarmaciaDados/mapa_rotas_comparadas/dados_entrada/coordenadas_drone.json) | Drone route input used in the comparison |
+| [`mapa_drone_urbano.html`](maps/comparative/mapa_drone_urbano.html) | Single map comparing the urban route and the drone route |
+| [`rotas_drone_urbano.geojson`](experimental_setup/output/rotas_drone_urbano.geojson) | Geometries of both routes and points |
+| [`resumo_comparativo.json`](experimental_setup/output/resumo_comparativo.json) | Final comparison metrics |
+| [`relatorio_rota_urbana.json`](experimental_setup/input/relatorio_rota_urbana.json) | Urban input used in the comparison |
+| [`rota_urbana.geojson`](experimental_setup/input/rota_urbana.geojson) | Urban geometry used in the comparison |
+| [`coordenadas.json`](experimental_setup/input/coordenadas.json) | Drone route input used in the comparison |
 
 ---
 

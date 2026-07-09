@@ -4,18 +4,18 @@ Esta pasta concentra uma versao comparativa sem apagar os scripts anteriores.
 
 ## Arquivos principais
 
-- `gerar_mapa_comparativo.py`: gera um unico mapa HTML com as duas rotas.
-- `dados_entrada/coordenadas_drone.json`: copia dos dados da rota de drone.
-- `dados_entrada/relatorio_rota_urbana.json`: copia do relatorio da rota urbana.
-- `dados_entrada/rota_urbana.geojson`: copia da geometria urbana.
-- `codigos_reaproveitados/`: copias dos scripts usados como referencia.
+- `scripts/gerar_mapa_comparativo.py`: gera um unico mapa HTML com as duas rotas.
+- `experimental_setup/input/coordenadas.json`: copia dos dados da rota de drone.
+- `experimental_setup/input/relatorio_rota_urbana.json`: copia do relatorio da rota urbana.
+- `experimental_setup/input/rota_urbana.geojson`: copia da geometria urbana.
+- `maps/scripts/`: scripts usados como referencia na comparacao.
 
 ## Como gerar o mapa
 
 Execute a partir da raiz do projeto:
 
 ```powershell
-.\venv\Scripts\python.exe .\PesquisaFarmaciaDados\mapa_rotas_comparadas\gerar_mapa_comparativo.py
+.\venv\Scripts\python.exe .\maps\scripts\gerar_mapa_comparativo.py
 ```
 
 ## Saidas
