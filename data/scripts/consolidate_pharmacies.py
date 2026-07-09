@@ -1,4 +1,4 @@
-"""
+﻿"""
 Consolidates downloaded pharmacy spreadsheets into a single normalized Excel workbook.
 """
 
@@ -7,10 +7,10 @@ from pathlib import Path
 import pandas as pd
 
 
-def consolidar_planilhas(pasta_input, arquivo_output="consolidado_farmacias.xlsx"):
+def consolidar_planilhas(pasta_input, arquivo_output="consolidated_pharmacies.xlsx"):
     """
     Consolidates all .xlsx tables from a folder into a single file,
-    adding the 'Município' column from the file name and a fixed 'UF' value of 'MG'.
+    adding the 'MunicÃ­pio' column from the file name and a fixed 'UF' value of 'MG'.
     """
     caminho_pasta = Path(pasta_input)
 
@@ -44,11 +44,11 @@ def consolidar_planilhas(pasta_input, arquivo_output="consolidado_farmacias.xlsx
             municipio = arquivo.stem
 
             # Add the new columns.
-            df["Município"] = municipio
+            df["MunicÃ­pio"] = municipio
             df["UF"] = "MG"
 
             # Ensure the main columns exist and keep them in a consistent order.
-            colunas_obrigatorias = ["CNPJ", "Farmácia", "Endereço", "Bairro", "Município", "UF"]
+            colunas_obrigatorias = ["CNPJ", "FarmÃ¡cia", "EndereÃ§o", "Bairro", "MunicÃ­pio", "UF"]
             for col in colunas_obrigatorias:
                 if col not in df.columns:
                     df[col] = None  # Create an empty column if the original does not exist.
@@ -67,16 +67,16 @@ def consolidar_planilhas(pasta_input, arquivo_output="consolidado_farmacias.xlsx
         df_consolidado = pd.concat(lista_dataframes, ignore_index=True)
 
         # Save the final result to a new Excel file.
-        caminho_saida = caminho_pasta / arquivo_output
-        df_consolidado.to_excel(caminho_saida, index=False)
-        print(f"\nSuccess! Consolidated file saved at: {caminho_saida.absolute()}")
+        caminho_output = caminho_pasta / arquivo_output
+        df_consolidado.to_excel(caminho_output, index=False)
+        print(f"\nSuccess! Consolidated file saved at: {caminho_output.absolute()}")
     else:
         print("\nNo valid data was extracted for consolidation.")
 
 
 if __name__ == "__main__":
     # "." means the script will look for spreadsheets in the folder where it is saved.
-    PASTA_DAS_PLANILHAS = "./downloads_farmacias"
-    ARQUIVO_FINAL = "consolidado_farmacias.xlsx"
+    PASTA_DAS_PLANILHAS = "./pharmacy_downloads"
+    ARQUIVO_FINAL = "consolidated_pharmacies.xlsx"
 
     consolidar_planilhas(PASTA_DAS_PLANILHAS, ARQUIVO_FINAL)

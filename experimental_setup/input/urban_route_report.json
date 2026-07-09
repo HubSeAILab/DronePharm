@@ -1,4 +1,4 @@
-{
+﻿{
   "metadata": {
     "generated_at": "2026-06-12T20:15:38-03:00",
     "routing_api": "OSRM Route API (cache de respostas reais)",
@@ -6,7 +6,7 @@
     "profile": "driving",
     "roundtrip": false,
     "route_model": "despachos individuais da farmacia para cada pedido",
-    "cache_file": "/home/gabriel/Faculdade/Pesquisa-DronePharm/Pesquisa/PesquisaFarmaciaDados/saida_rotas_pedidos/rotas_farmacias.json"
+    "cache_file": "/home/gabriel/Faculdade/Pesquisa-DronePharm/Pesquisa/PesquisaFarmaciaDados/order_route_outputs/pharmacy_routes.json"
   },
   "base": {
     "point_id": "base",

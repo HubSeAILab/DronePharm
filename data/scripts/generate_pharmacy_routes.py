@@ -1,4 +1,4 @@
-"""
+﻿"""
 Generates routes from Belo Horizonte pharmacies to random delivery points.
 
 Main workflow:
@@ -13,9 +13,9 @@ Suggested dependencies:
     pip install pandas requests geopy folium
 
 Usage example:
-    python gerar_rotas_farmacias.py ^
-        --input "dados_com_coordenadas(Sheet1).csv" ^
-        --output-dir "saida_rotas" ^
+    python generate_pharmacy_routes.py ^
+        --input "data_with_coordinates.csv" ^
+        --output-dir "route_outputs" ^
         --num-pontos 10 ^
         --max-farmacias 5
 
@@ -56,37 +56,37 @@ RMBH_CIDADES = {
     "ribeirao das neves",
     "santa luzia",
     "ibirite",
-    "sabará",
+    "sabarÃ¡",
     "sabara",
     "vespasiano",
     "lagoa santa",
     "confins",
     "matozinhos",
     "sao jose da lapa",
-    "são josé da lapa",
+    "sÃ£o josÃ© da lapa",
     "juatuba",
     "mateus leme",
     "sao joaquim de bicas",
-    "são joaquim de bicas",
+    "sÃ£o joaquim de bicas",
     "itatiaiucu",
     "igarape",
-    "igarapé",
+    "igarapÃ©",
     "sarzedo",
     "esmeraldas",
     "brumadinho",
     "florestal",
     "rio manso",
     "taquaracu de minas",
-    "taquaraçu de minas",
+    "taquaraÃ§u de minas",
     "raposos",
     "caete",
-    "caeté",
+    "caetÃ©",
     "capim branco",
     "pedro leopoldo",
     "rio acima",
     "baldim",
     "nova uniao",
-    "nova união",
+    "nova uniÃ£o",
     "ravena",
 }
 
@@ -291,14 +291,14 @@ def build_pharmacy_records(df: pd.DataFrame) -> list[PharmacyRecord]:
     """Convert prepared pharmacy rows into typed PharmacyRecord objects."""
     records: list[PharmacyRecord] = []
 
-    name_col = find_column(df, ["Farmácia", "Farmacia", "nome", "name"])
-    address_col = find_column(df, ["Endereço", "Endereco", "logradouro", "address"], required=False)
+    name_col = find_column(df, ["FarmÃ¡cia", "Farmacia", "nome", "name"])
+    address_col = find_column(df, ["EndereÃ§o", "Endereco", "logradouro", "address"], required=False)
     bairro_col = find_column(df, ["Bairro", "district", "bairro"], required=False)
     city_col = find_column(df, ["Cidade", "city", "municipio"])
     state_col = find_column(df, ["Estado", "uf", "state"], required=False)
     lat_col = find_column(df, ["Latitude", "lat", "latitude"])
     lon_col = find_column(df, ["Longitude", "lon", "lng", "longitude"])
-    full_address_col = find_column(df, ["EnderecoCompleto", "Endereço Completo", "full_address"], required=False)
+    full_address_col = find_column(df, ["EnderecoCompleto", "EndereÃ§o Completo", "full_address"], required=False)
 
     for idx, row in df.iterrows():
         lat = parse_decimal(row.get(lat_col))
@@ -611,10 +611,10 @@ def prepare_dataframe(df: pd.DataFrame, region_mode: str, geocode_delay_seconds:
     city_col = find_column(df, ["Cidade", "city", "municipio"])
     lat_col = find_column(df, ["Latitude", "lat", "latitude"], required=False)
     lon_col = find_column(df, ["Longitude", "lon", "lng", "longitude"], required=False)
-    address_col = find_column(df, ["Endereço", "Endereco", "logradouro", "address"], required=False)
+    address_col = find_column(df, ["EndereÃ§o", "Endereco", "logradouro", "address"], required=False)
     bairro_col = find_column(df, ["Bairro", "district", "bairro"], required=False)
     state_col = find_column(df, ["Estado", "uf", "state"], required=False)
-    full_address_col = find_column(df, ["EnderecoCompleto", "Endereço Completo", "full_address"], required=False)
+    full_address_col = find_column(df, ["EnderecoCompleto", "EndereÃ§o Completo", "full_address"], required=False)
 
     filtered = filter_region(df, city_col=city_col, region_mode=region_mode).reset_index(drop=True)
     if filtered.empty:
@@ -688,7 +688,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Calculates OSRM routes between pharmacies and random points in BH.")
     parser.add_argument("--input", required=True, help="Path to the input CSV file.")
     parser.add_argument("--pedidos-csv", help="CSV with orders containing id_pedido, nome_rua, latitude, and longitude.")
-    parser.add_argument("--output-dir", default="saida_rotas", help="Directory where files will be generated.")
+    parser.add_argument("--output-dir", default="route_outputs", help="Directory where files will be generated.")
     parser.add_argument("--region-mode", choices=["bh", "rmbh"], default="bh", help="Filters either BH only or the full metropolitan region.")
     parser.add_argument("--num-pontos", type=int, default=10, help="Number of random delivery points.")
     parser.add_argument("--farmacia-base", help="Exact pharmacy name to use as the base. If omitted, uses all pharmacies.")
@@ -778,10 +778,10 @@ def main() -> None:
         "pharmacies": pharmacy_results,
     }
 
-    json_path = output_dir / "rotas_farmacias.json"
-    geojson_path = output_dir / "rotas_farmacias.geojson"
-    html_map_path = output_dir / "rotas_farmacias_mapa.html"
-    csv_preview_path = output_dir / "farmacias_processadas.csv"
+    json_path = output_dir / "pharmacy_routes.json"
+    geojson_path = output_dir / "pharmacy_routes.geojson"
+    html_map_path = output_dir / "pharmacy_routes_map.html"
+    csv_preview_path = output_dir / "processed_pharmacies.csv"
 
     print(f"[6/6] Exporting results...")
     export_json(results_payload, json_path)

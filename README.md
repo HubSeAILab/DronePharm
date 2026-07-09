@@ -1,4 +1,4 @@
-# DronePharm Research
+﻿# DronePharm Research
 
 Research repository for the **DronePharm** project, prepared to accompany a paper on route planning for medication deliveries by **drone** and **urban transport** in Belo Horizonte, MG (Brazil).
 
@@ -44,25 +44,25 @@ The repository includes:
 | Estimated urban fuel cost | R$ 40.67 |
 | Estimated urban emissions | 15.154 kg CO2 |
 
-Summary source: [`resumo_comparativo.json`](experimental_setup/output/resumo_comparativo.json)
+Summary source: [`comparative_summary.json`](experimental_setup/output/comparative_summary.json)
 
 ---
 
 ## Data Sources
 
 Pharmacies were registered from data obtained on the Brazilian Federal Government website. The spreadsheets downloaded per municipality are located at:
-[`downloads_farmacias/`](data/scripts/downloads_farmacias/)
+[`pharmacy_downloads/`](data/scripts/pharmacy_downloads/)
 
 ### Files Derived from Pharmacy Data
 
 | File | Content |
 | --- | --- |
-| [`consolidado_farmacias.xlsx`](data/scripts/consolidado_farmacias.xlsx) | Consolidated spreadsheet of pharmacies by municipality |
-| [`farmacias_com_coordenadas.xlsx`](data/scripts/farmacias_com_coordenadas.xlsx) | Pharmacies with latitude and longitude |
-| [`dados_com_coordenadas.csv`](data/dados_com_coordenadas.csv) | CSV base used in the route scripts |
-| [`farmacias_processadas.csv`](data/scripts/saida_rotas/farmacias_processadas.csv) | Pharmacies filtered for the experiment |
+| 
+| [`pharmacies_with_coordinates.xlsx`](data/scripts/pharmacies_with_coordinates.xlsx) | Pharmacies with latitude and longitude |
+| [`data_with_coordinates.csv`](data/data_with_coordinates.csv) | CSV base used in the route scripts |
+|
 
-Orders used in the scenario: [`pedidos_belo_horizonte.csv`](data/pedidos_belo_horizonte.csv)
+Orders used in the scenario: [`belo_horizonte_orders.csv`](data/belo_horizonte_orders.csv)
 
 > **OpenStreetMap** was used to geocode addresses, display base maps, and trace ground routes over the road network. Ground route queries were performed via **OSRM**.
 
@@ -72,13 +72,13 @@ Orders used in the scenario: [`pedidos_belo_horizonte.csv`](data/pedidos_belo_ho
 
 | File | Function |
 | --- | --- |
-| [`pharms.py`](data/scripts/pharms.py) | Consolidates pharmacy spreadsheets downloaded per municipality |
-| [`cords.py`](data/scripts/cords.py) | Geocodes pharmacies using Nominatim/OpenStreetMap |
-| [`gerar_rotas_farmacias.py`](data/scripts/gerar_rotas_farmacias.py) | Generates routes between pharmacies and orders, exporting JSON, GeoJSON, and HTML |
-| [`gerar_transporte_urbano.py`](maps/scripts/gerar_transporte_urbano.py) | Calculates the urban route with the OSRM Trip API and generates maps/reports |
-| [`plot_rota.py`](experimental_setup/scripts/plot_rota.py) | Generates drone route maps in different layers |
-| [`relatorio_telemetria.py`](experimental_setup/scripts/relatorio_telemetria.py) | Generates a PDF telemetry report for the drone route |
-| [`gerar_mapa_comparativo.py`](maps/scripts/gerar_mapa_comparativo.py) | Generates a map and GeoJSON comparing the urban route and the drone route |
+| [`consolidate_pharmacies.py`](data/scripts/consolidate_pharmacies.py) | Consolidates pharmacy spreadsheets downloaded per municipality |
+| [`geocode_pharmacies.py`](data/scripts/geocode_pharmacies.py) | Geocodes pharmacies using Nominatim/OpenStreetMap |
+| [`generate_pharmacy_routes.py`](data/scripts/generate_pharmacy_routes.py) | Generates routes between pharmacies and orders, exporting JSON, GeoJSON, and HTML |
+| [`generate_urban_transport.py`](maps/scripts/generate_urban_transport.py) | Calculates the urban route with the OSRM Trip API and generates maps/reports |
+| [`plot_route.py`](experimental_setup/scripts/plot_route.py) | Generates drone route maps in different layers |
+| [`telemetry_report.py`](experimental_setup/scripts/telemetry_report.py) | Generates a PDF telemetry report for the drone route |
+| [`generate_comparative_map.py`](maps/scripts/generate_comparative_map.py) | Generates a map and GeoJSON comparing the urban route and the drone route |
 | [`maps/`](maps/) | Comparative maps, drone flight paths, ground vehicle maps, and order maps |
 
 ---
@@ -87,14 +87,14 @@ Orders used in the scenario: [`pedidos_belo_horizonte.csv`](data/pedidos_belo_ho
 
 ### Pharmacy-to-Order Routes
 
-Folder: [`data/scripts/saida_rotas/`](data/scripts/saida_rotas/)
+Folder: [`data/scripts/route_outputs/`](data/scripts/route_outputs/)
 
 | File | Content |
 | --- | --- |
-| [`rotas_farmacias.json`](data/scripts/saida_rotas/rotas_farmacias.json) | Complete data of routes between pharmacies and orders |
-| [`rotas_farmacias.geojson`](data/scripts/saida_rotas/rotas_farmacias.geojson) | Geometries in GIS format |
-| [`rotas_farmacias_mapa.html`](data/scripts/saida_rotas/rotas_farmacias_mapa.html) | Interactive map |
-| [`farmacias_processadas.csv`](data/scripts/saida_rotas/farmacias_processadas.csv) | Pharmacies used in the generation |
+| [`pharmacy_routes.json`](data/scripts/route_outputs/pharmacy_routes.json) | Complete data of routes between pharmacies and orders |
+| [`pharmacy_routes.geojson`](data/scripts/route_outputs/pharmacy_routes.geojson) | Geometries in GIS format |
+| [`pharmacy_routes_map.html`](data/scripts/route_outputs/pharmacy_routes_map.html) | Interactive map |
+| [`processed_pharmacies.csv`](data/scripts/route_outputs/processed_pharmacies.csv) | Pharmacies used in the generation |
 
 **Summary of the 5 selected pharmacies**
 
@@ -114,13 +114,13 @@ Folder: [`experimental_setup/input/`](experimental_setup/input/)
 
 | File | Content |
 | --- | --- |
-| [`relatorio_rota_urbana.json`](experimental_setup/input/relatorio_rota_urbana.json) | Metrics, stops, legs, and geometry of the urban route |
-| [`rota_urbana.geojson`](experimental_setup/input/rota_urbana.geojson) | Urban route geometry |
-| [`relatorio_transporte_urbano.md`](experimental_setup/reports/relatorio_transporte_urbano.md) | Executive report |
-| [`mapa_terrestre_osm.html`](maps/ground_vehicle_route/mapa_terrestre_osm.html) | Map with OpenStreetMap layer |
-| [`mapa_terrestre_claro.html`](maps/ground_vehicle_route/mapa_terrestre_claro.html) | Map with light layer |
-| [`mapa_terrestre_ruas.html`](maps/ground_vehicle_route/mapa_terrestre_ruas.html) | Map with street layer |
-| [`mapa_terrestre_satelite.html`](maps/ground_vehicle_route/mapa_terrestre_satelite.html) | Map with satellite layer |
+| [`urban_route_report.json`](experimental_setup/input/urban_route_report.json) | Metrics, stops, legs, and geometry of the urban route |
+| [`urban_route.geojson`](experimental_setup/input/urban_route.geojson) | Urban route geometry |
+| [`urban_transport_report.md`](experimental_setup/reports/urban_transport_report.md) | Executive report |
+| [`ground_route_osm.html`](maps/ground_vehicle_route/ground_route_osm.html) | Map with OpenStreetMap layer |
+| [`ground_route_light.html`](maps/ground_vehicle_route/ground_route_light.html) | Map with light layer |
+| [`ground_route_streets.html`](maps/ground_vehicle_route/ground_route_streets.html) | Map with street layer |
+| [`ground_route_satellite.html`](maps/ground_vehicle_route/ground_route_satellite.html) | Map with satellite layer |
 
 **Urban Base**
 
@@ -178,13 +178,13 @@ Folder: [`experimental_setup/input/`](experimental_setup/input/)
 
 | File | Content |
 | --- | --- |
-| [`coordenadas.json`](experimental_setup/input/coordenadas.json) | Waypoints, payload, energy, cost, and feasibility |
-| [`relatorio_telemetria_rota.md`](experimental_setup/reports/relatorio_telemetria_rota.md) | Telemetry report |
-| [`rota_drone_openstreetmap.html`](maps/drone_flight_path/rota_drone_openstreetmap.html) | Map with OpenStreetMap |
-| [`rota_drone_satelite_esri.html`](maps/drone_flight_path/rota_drone_satelite_esri.html) | Map with satellite view |
-| [`rota_drone_cartodb_positron.html`](maps/drone_flight_path/rota_drone_cartodb_positron.html) | Map with CartoDB Positron |
-| [`rota_drone_cartodb_voyager.html`](maps/drone_flight_path/rota_drone_cartodb_voyager.html) | Map with CartoDB Voyager |
-| [`rota_drone_mapas.pdf`](experimental_setup/scripts/rota_drone_mapas.pdf) | Route maps in PDF |
+| [`coordinates.json`](experimental_setup/input/coordinates.json) | Waypoints, payload, energy, cost, and feasibility |
+| [`route_telemetry_report.md`](experimental_setup/reports/route_telemetry_report.md) | Telemetry report |
+| [`drone_route_openstreetmap.html`](maps/drone_flight_path/drone_route_openstreetmap.html) | Map with OpenStreetMap |
+| [`drone_route_satellite_esri.html`](maps/drone_flight_path/drone_route_satellite_esri.html) | Map with satellite view |
+| [`drone_route_cartodb_positron.html`](maps/drone_flight_path/drone_route_cartodb_positron.html) | Map with CartoDB Positron |
+| [`drone_route_cartodb_voyager.html`](maps/drone_flight_path/drone_route_cartodb_voyager.html) | Map with CartoDB Voyager |
+| [`drone_route_maps.pdf`](experimental_setup/scripts/drone_route_maps.pdf) | Route maps in PDF |
 | [`maps/drone_flight_path/`](maps/drone_flight_path/) | Copies of the drone route maps |
 
 **Drone Route Metrics**
@@ -236,12 +236,12 @@ Folder: [`maps/comparative/`](maps/comparative/)
 
 | File | Content |
 | --- | --- |
-| [`mapa_drone_urbano.html`](maps/comparative/mapa_drone_urbano.html) | Single map comparing the urban route and the drone route |
-| [`rotas_drone_urbano.geojson`](experimental_setup/output/rotas_drone_urbano.geojson) | Geometries of both routes and points |
-| [`resumo_comparativo.json`](experimental_setup/output/resumo_comparativo.json) | Final comparison metrics |
-| [`relatorio_rota_urbana.json`](experimental_setup/input/relatorio_rota_urbana.json) | Urban input used in the comparison |
-| [`rota_urbana.geojson`](experimental_setup/input/rota_urbana.geojson) | Urban geometry used in the comparison |
-| [`coordenadas.json`](experimental_setup/input/coordenadas.json) | Drone route input used in the comparison |
+| [`drone_urban_map.html`](maps/comparative/drone_urban_map.html) | Single map comparing the urban route and the drone route |
+| [`drone_urban_routes.geojson`](experimental_setup/output/drone_urban_routes.geojson) | Geometries of both routes and points |
+| [`comparative_summary.json`](experimental_setup/output/comparative_summary.json) | Final comparison metrics |
+| [`urban_route_report.json`](experimental_setup/input/urban_route_report.json) | Urban input used in the comparison |
+| [`urban_route.geojson`](experimental_setup/input/urban_route.geojson) | Urban geometry used in the comparison |
+| [`coordinates.json`](experimental_setup/input/coordinates.json) | Drone route input used in the comparison |
 
 ---
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Geocodes pharmacy addresses, adds the central depot, builds an interactive map,
 and optionally exports the map as a PDF.
 
@@ -7,7 +7,7 @@ Requirements:
     Selenium, Pillow, and ChromeDriver are only required for PDF export.
 
 Usage:
-    python plotar_mapa.py input.xlsx
+    python plot_map.py input.xlsx
 """
 
 import json
@@ -29,8 +29,8 @@ PDF_MAP_FILE = "mapa_pontos.pdf"
 TILE_STYLE = "cartodbpositron"
 
 CENTRAL_DEPOT = {
-    "Farmácia": "DROGARIA ARAUJO S A",
-    "Endereço": "AVENIDA DO CONTORNO, 6714",
+    "FarmÃ¡cia": "DROGARIA ARAUJO S A",
+    "EndereÃ§o": "AVENIDA DO CONTORNO, 6714",
     "Bairro": "LOURDES",
     "Cidade": "Belo Horizonte",
     "Estado": "MG",
@@ -39,8 +39,8 @@ CENTRAL_DEPOT = {
 }
 
 COLUMN_ALIASES = {
-    "pharmacy": ["Farmácia", "Farmacia", "name"],
-    "address": ["Endereço", "Endereco", "address"],
+    "pharmacy": ["FarmÃ¡cia", "Farmacia", "name"],
+    "address": ["EndereÃ§o", "Endereco", "address"],
     "district": ["Bairro", "district"],
     "city": ["Cidade", "city"],
     "state": ["Estado", "UF", "state"],
@@ -114,7 +114,7 @@ def add_depot(df, cache):
     save_cache(cache)
 
     name_col = find_column(df, COLUMN_ALIASES["pharmacy"], required=False) or df.columns[1]
-    depot_name = CENTRAL_DEPOT["Farmácia"]
+    depot_name = CENTRAL_DEPOT["FarmÃ¡cia"]
 
     df = df[df[name_col] != depot_name].reset_index(drop=True)
     new_row = {col: CENTRAL_DEPOT.get(col) for col in df.columns}
@@ -190,7 +190,7 @@ def create_map(df):
     )
 
     name_col = find_column(valid_df, COLUMN_ALIASES["pharmacy"], required=False) or valid_df.columns[1]
-    depot_name = CENTRAL_DEPOT["Farmácia"]
+    depot_name = CENTRAL_DEPOT["FarmÃ¡cia"]
 
     depot_row = valid_df[valid_df[name_col] == depot_name]
     depot_coords = None
@@ -313,8 +313,8 @@ if __name__ == "__main__":
     geocoded_df = geocode_data(data_frame)
 
     # Save the coordinate table for validation and later use.
-    geocoded_df.to_excel("dados_com_coordenadas.xlsx", index=False)
-    print("\nCoordinate table saved at: dados_com_coordenadas.xlsx")
+    geocoded_df.to_excel("data_with_coordinates.xlsx", index=False)
+    print("\nCoordinate table saved at: data_with_coordinates.xlsx")
 
     print("\nCreating map...")
     create_map(geocoded_df)

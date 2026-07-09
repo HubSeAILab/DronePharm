@@ -1,6 +1,6 @@
-{
+﻿{
   "metadata": {
-    "input_file": "PesquisaFarmaciaDados\\dados_com_coordenadas(Sheet1).csv",
+    "input_file": "PesquisaFarmaciaDados\\data_with_coordinates.csv",
     "region_mode": "bh",
     "num_pharmacies": 5,
     "num_delivery_points": 20,
@@ -11,7 +11,7 @@
       "min_lon": -44.1,
       "max_lon": -43.85
     },
-    "pedidos_csv": ".\\PesquisaFarmaciaDados\\pedidos_belo_horizonte.csv",
+    "pedidos_csv": ".\\PesquisaFarmaciaDados\\belo_horizonte_orders.csv",
     "osrm_base_url": "http://router.project-osrm.org/route/v1/driving",
     "generated_at_unix": 1781214456.3355894
   },
@@ -160,7 +160,7 @@
   "geocoding_logs": [
     {
       "row_index": 0,
-      "full_address": "RUA MACAÉ, Nº 373, BAIRRO DA GRAÇA, Belo Horizonte, MG, Brasil",
+      "full_address": "RUA MACAÃ‰, NÂº 373, BAIRRO DA GRAÃ‡A, Belo Horizonte, MG, Brasil",
       "status": "not_found"
     },
     {
@@ -170,7 +170,7 @@
     },
     {
       "row_index": 52,
-      "full_address": "AVENIDA  PORTUGAL Nº2841, JARDIM ATLANTIDA, Belo Horizonte, MG, Brasil",
+      "full_address": "AVENIDA  PORTUGAL NÂº2841, JARDIM ATLANTIDA, Belo Horizonte, MG, Brasil",
       "status": "not_found"
     },
     {
@@ -185,7 +185,7 @@
     },
     {
       "row_index": 73,
-      "full_address": "RUA CORAÇÃO EUCARÍSTICO DE JESUS, 139, COR EUC DE JUSUS, Belo Horizonte, MG, Brasil",
+      "full_address": "RUA CORAÃ‡ÃƒO EUCARÃSTICO DE JESUS, 139, COR EUC DE JUSUS, Belo Horizonte, MG, Brasil",
       "status": "not_found"
     },
     {

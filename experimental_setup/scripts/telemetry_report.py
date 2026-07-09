@@ -1,9 +1,9 @@
-"""
+﻿"""
 Executive Telemetry and Route Feasibility Report
 =========================================================
 
 Modular script for:
-1. Loading settings (settings.json) and the route (coordenadas.json);
+1. Loading settings (settings.json) and the route (coordinates.json);
 2. Calculating geodesic distances (Haversine), bearings, and wind impact
    on cruise speed (ground speed);
 3. Estimating flight time, energy use, financial cost, efficiency
@@ -82,7 +82,7 @@ def carregar_dados(
 
     Args:
         caminho_settings: Path to the settings.json file.
-        caminho_coordenadas: Path to the coordenadas.json file.
+        caminho_coordenadas: Path to the coordinates.json file.
 
     Returns:
         A tuple (configuracoes, pontos_rota), where:
@@ -239,7 +239,7 @@ def _normalizar_coordenadas(dados: Any) -> List[Dict[str, Any]]:
          (real format provided by the user).
 
     Args:
-        dados: Raw content from coordenadas.json (list or dictionary).
+        dados: Raw content from coordinates.json (list or dictionary).
 
     Returns:
         List of points no formato {"nome": str, "lat": float, "lng": float}.
@@ -713,9 +713,9 @@ def _montar_tabela_navegacao(
         Objeto Table do reportlab pronto para ser inserido no documento.
     """
     cabecalho = [
-        "Origem ➔ Destino",
+        "Origem âž” Destino",
         "Dist. (km)",
-        "Azimute (°)",
+        "Azimute (Â°)",
         "Vel. c/ Vento (km/h)",
         "Time (min)",
     ]
@@ -723,7 +723,7 @@ def _montar_tabela_navegacao(
     dados_tabela: List[List[Any]] = [cabecalho]
 
     for trecho in trechos:
-        rota_texto = f"{trecho['origem']}\n➔ {trecho['destino']}"
+        rota_texto = f"{trecho['origem']}\nâž” {trecho['destino']}"
         dados_tabela.append(
             [
                 Paragraph(rota_texto.replace("\n", "<br/>"), estilos["corpo"]),
@@ -768,7 +768,7 @@ def _montar_tabela_navegacao(
 
 
 def gerar_pdf(
-    caminho_saida: str,
+    caminho_output: str,
     configuracoes: Dict[str, Any],
     pontos_rota: List[Dict[str, Any]],
     telemetria: Dict[str, Any],
@@ -778,7 +778,7 @@ def gerar_pdf(
     """Generates the executive telemetry report as a PDF.
 
     Args:
-        caminho_saida: Path to the PDF file to be generated.
+        caminho_output: Path to the PDF file to be generated.
         configuracoes: Normalized settings dictionary.
         pontos_rota: List of route points.
         telemetria: Dictionary returned by `calcular_telemetria_rota`
@@ -793,7 +793,7 @@ def gerar_pdf(
     trechos = telemetria["trechos"]
 
     documento = SimpleDocTemplate(
-        caminho_saida,
+        caminho_output,
         pagesize=A4,
         leftMargin=1.5 * cm,
         rightMargin=1.5 * cm,
@@ -934,8 +934,8 @@ def main() -> None:
 
     # 2. Build paths dynamically in the same folder as the script
     caminho_settings = os.path.join(diretorio_atual, "settings.json")
-    caminho_coordenadas = os.path.join(diretorio_atual, "coordenadas.json")
-    caminho_saida_pdf = os.path.join(diretorio_atual, "relatorio_telemetria_rota.pdf")
+    caminho_coordenadas = os.path.join(diretorio_atual, "coordinates.json")
+    caminho_output_pdf = os.path.join(diretorio_atual, "route_telemetry_report.pdf")
 
     try:
         configuracoes, pontos_rota = carregar_dados(
@@ -949,11 +949,11 @@ def main() -> None:
 
     # Create the output folder if it does not exist (it will not be strictly necessary
     # if the PDF is saved in the same folder as the script, but it is good practice)
-    os.makedirs(os.path.dirname(caminho_saida_pdf), exist_ok=True)
+    os.makedirs(os.path.dirname(caminho_output_pdf), exist_ok=True)
 
     try:
         gerar_pdf(
-            caminho_saida_pdf,
+            caminho_output_pdf,
             configuracoes,
             pontos_rota,
             telemetria,
@@ -965,7 +965,7 @@ def main() -> None:
         return
 
     resumo = telemetria["resumo"]
-    print("Report generated successfully at:", caminho_saida_pdf)
+    print("Report generated successfully at:", caminho_output_pdf)
     print(f"Total distance: {resumo['distancia_total_km']:.2f} km")
     print(f"Total time: {resumo['tempo_total_min']:.1f} min")
     print(f"Total cost: R$ {resumo['custo_total']:.2f}")

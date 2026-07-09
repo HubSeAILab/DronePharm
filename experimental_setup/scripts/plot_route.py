@@ -1,4 +1,4 @@
-"""
+﻿"""
 Generates dynamic Folium/Leaflet maps for the drone route in 4 tile styles:
   1. CartoDB Positron
   2. OpenStreetMap
@@ -18,7 +18,7 @@ an inherent limitation of any tile-map capture (Leaflet, Google
 Maps, etc).
 
 If you need VECTOR quality (infinite lossless zoom, ideal for
-printed scientific papers), use the script 'plot_rota.py' (matplotlib),
+printed scientific papers), use the script 'plot_route.py' (matplotlib),
 which generates lines, markers, and text as real vectors; only the background tile
 is raster, and the document as a whole remains much sharper when zoomed.
 
@@ -41,7 +41,7 @@ from folium.plugins import AntPath
 # ---------------------------------------------------------
 # 1. Load data
 # ---------------------------------------------------------
-with open("coordenadas.json", "r", encoding="utf-8") as f:
+with open("coordinates.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 waypoints = data["waypoints_json"]
@@ -79,7 +79,7 @@ TILE_LAYERS = {
         "attr": None,
         "titulo": "CartoDB Voyager",
     },
-    "satelite_esri": {
+    "satellite_esri": {
         "tiles": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         "attr": "Esri World Imagery",
         "titulo": "Satellite (Esri)",
@@ -167,7 +167,7 @@ def build_map(tiles, attr, titulo):
 html_files = {}
 for key, cfg in TILE_LAYERS.items():
     m = build_map(cfg["tiles"], cfg["attr"], cfg["titulo"])
-    filename = f"rota_drone_{key}.html"
+    filename = f"drone_route_{key}.html"
     m.save(filename)
     html_files[key] = (filename, cfg["titulo"])
     print(f"Gerado: {filename}")
@@ -206,7 +206,7 @@ if EXPORTAR_PDF:
         driver.get(f"file://{html_path}")
         time.sleep(4)  # aguarda os tiles carregarem completamente
 
-        png_path = f"rota_drone_{key}.png"
+        png_path = f"drone_route_{key}.png"
         driver.save_screenshot(png_path)
         png_paths.append(png_path)
         print(f"Capturado: {png_path}")
@@ -217,13 +217,13 @@ if EXPORTAR_PDF:
     images = [Image.open(p).convert("RGB") for p in png_paths]
     first, rest = images[0], images[1:]
     first.save(
-        "rota_drone_mapas.pdf",
+        "drone_route_maps.pdf",
         format="PDF",
         save_all=True,
         append_images=rest,
         resolution=300.0,
     )
-    print("PDF generated: rota_drone_mapas.pdf")
+    print("PDF generated: drone_route_maps.pdf")
 else:
     print(
         "\nTo generate a high-resolution PDF with the 4 map styles,\n"

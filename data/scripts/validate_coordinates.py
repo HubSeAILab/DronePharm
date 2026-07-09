@@ -1,4 +1,4 @@
-"""
+﻿"""
 Validates existing pharmacy coordinates by querying OpenStreetMap and comparing the returned coordinates with the spreadsheet values.
 """
 
@@ -11,7 +11,7 @@ from geopy.geocoders import Nominatim
 
 # 1. Load the Excel file.
 # Replace this with the correct file name.
-df = pd.read_excel("dados_com_coordenadas.xlsx")
+df = pd.read_excel("data_with_coordinates.xlsx")
 
 # 2. Initialize the OpenStreetMap geocoder.
 # The user_agent parameter is required and identifies this application.
@@ -52,5 +52,5 @@ for index, row in df.iterrows():
         time.sleep(2)  # Extra pause after a connection failure.
 
 # 4. Save the result with the new validation columns.
-df.to_excel("resultado_conferencia.xlsx", index=False)
-print("Validation complete! File 'resultado_conferencia.xlsx' saved successfully.")
+df.to_excel("validation_result.xlsx", index=False)
+print("Validation complete! File 'validation_result.xlsx' saved successfully.")

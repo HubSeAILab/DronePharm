@@ -1,13 +1,13 @@
-"""Generates an urban ground route, themed maps, and an executive report.
+﻿"""Generates an urban ground route, themed maps, and an executive report.
 
 O calculo principal usa o servico Trip do OSRM, que otimiza a ordem das
 stops and returns distance, duration, legs, and geometry over the road network.
 
 Exemplo:
-    python gerar_transporte_urbano.py 
-        --farmacias "dados_com_coordenadas(Sheet1).csv" 
-        --pedidos pedidos_belo_horizonte.csv 
-        --saida saida_transporte_urbano
+    python generate_urban_transport.py 
+        --farmacias "data_with_coordinates.csv" 
+        --pedidos belo_horizonte_orders.csv 
+        --output urban_transport_outputs
 """
 
 from __future__ import annotations
@@ -79,14 +79,14 @@ def load_base(path: Path, requested_name: str | None) -> Point:
         city = get_value(row, "Cidade", "city")
         lat = get_value(row, "Latitude", "lat")
         lon = get_value(row, "Longitude", "lon", "lng")
-        name = get_value(row, "Farmacia", "Farmácia", "nome", "name")
+        name = get_value(row, "Farmacia", "FarmÃ¡cia", "nome", "name")
         if city.lower().strip() != "belo horizonte" or not lat or not lon:
             continue
         try:
             point = Point(
                 point_id="base",
                 label=name or "Base pharmacy",
-                street=get_value(row, "Endereco", "Endereço", "logradouro"),
+                street=get_value(row, "Endereco", "EndereÃ§o", "logradouro"),
                 lat=parse_number(lat),
                 lon=parse_number(lon),
                 kind="base",
@@ -357,8 +357,8 @@ def write_geojson(result: dict[str, Any], path: Path) -> None:
 
 
 TILE_STYLES = {
-    "claro": {
-        "name": "Mapa claro",
+    "light": {
+        "name": "Mapa light",
         "url": "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
         "attribution": "OpenStreetMap / CARTO",
     },
@@ -367,13 +367,13 @@ TILE_STYLES = {
         "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
         "attribution": "OpenStreetMap contributors",
     },
-    "ruas": {
+    "streets": {
         "name": "Simplified urban map",
         "url": "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
         "attribution": "OpenStreetMap / CARTO",
     },
-    "satelite": {
-        "name": "Imagem de satelite",
+    "satellite": {
+        "name": "Imagem de satellite",
         "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         "attribution": "Esri World Imagery",
     },
@@ -412,7 +412,7 @@ def write_html_maps(result: dict[str, Any], output_dir: Path) -> list[Path]:
     """Generate all configured interactive HTML map variants for the urban route."""
     paths = []
     for key, style in TILE_STYLES.items():
-        path = output_dir / f"mapa_terrestre_{key}.html"
+        path = output_dir / f"ground_route_{key}.html"
         path.write_text(leaflet_html(result, style), encoding="utf-8")
         paths.append(path)
     return paths
@@ -520,9 +520,9 @@ def parse_args() -> argparse.Namespace:
     """Parse command-line arguments that configure inputs, outputs, and routing behavior."""
     base_dir = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(description="Generates a ground urban transport route and report")
-    parser.add_argument("--farmacias", type=Path, default=base_dir / "dados_com_coordenadas(Sheet1).csv")
-    parser.add_argument("--pedidos", type=Path, default=base_dir / "pedidos_belo_horizonte.csv")
-    parser.add_argument("--saida", type=Path, default=base_dir / "saida_transporte_urbano")
+    parser.add_argument("--farmacias", type=Path, default=base_dir / "data_with_coordinates.csv")
+    parser.add_argument("--pedidos", type=Path, default=base_dir / "belo_horizonte_orders.csv")
+    parser.add_argument("--output", type=Path, default=base_dir / "urban_transport_outputs")
     parser.add_argument("--farmacia-base")
     parser.add_argument("--max-pedidos", type=int, default=20)
     parser.add_argument("--osrm-url", default=os.environ.get("OSRM_BASE_URL", DEFAULT_OSRM))
@@ -531,7 +531,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--preco-combustivel", type=float, default=6.20)
     parser.add_argument("--co2-kg-l", type=float, default=2.31)
     parser.add_argument("--tempo-parada-min", type=float, default=3.0)
-    parser.add_argument("--cache-osrm", type=Path, default=base_dir / "saida_rotas_pedidos" / "rotas_farmacias.json")
+    parser.add_argument("--cache-osrm", type=Path, default=base_dir / "order_route_outputs" / "pharmacy_routes.json")
     parser.add_argument("--usar-cache", action="store_true", help="Usa diretamente as respostas OSRM ja salvas")
     parser.add_argument("--sem-cache", action="store_true", help="Falha se a consulta online nao responder")
     return parser.parse_args()
@@ -540,7 +540,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     """Run the script workflow from command-line parsing through output generation."""
     args = parse_args()
-    args.saida.mkdir(parents=True, exist_ok=True)
+    args.output.mkdir(parents=True, exist_ok=True)
     base = load_base(args.farmacias, args.farmacia_base)
     deliveries = load_deliveries(args.pedidos, args.max_pedidos)
     points = [base, *deliveries]
@@ -576,14 +576,14 @@ def main() -> None:
             stop_minutes=args.tempo_parada_min,
         )
     print("[2/5] Gravando JSON e GeoJSON...")
-    (args.saida / "relatorio_rota_urbana.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    (args.output / "urban_route_report.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     if payload is not None:
-        (args.saida / "resposta_osrm_original.json").write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
-    write_geojson(result, args.saida / "rota_urbana.geojson")
+        (args.output / "original_osrm_response.json").write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    write_geojson(result, args.output / "urban_route.geojson")
     print("[3/5] Generating four interactive maps...")
-    write_html_maps(result, args.saida)
+    write_html_maps(result, args.output)
     print("[4/5] Generating PDF report...")
-    render_report(result, args.saida / "relatorio_transporte_urbano.pdf")
+    render_report(result, args.output / "urban_transport_report.pdf")
     print("[5/5] Done")
     print(json.dumps(result["summary"], ensure_ascii=False, indent=2))
 

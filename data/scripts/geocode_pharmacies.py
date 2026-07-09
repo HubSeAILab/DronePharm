@@ -1,4 +1,4 @@
-"""
+﻿"""
 Geocodes consolidated pharmacy spreadsheets and writes latitude/longitude columns to a new Excel file.
 """
 
@@ -8,7 +8,7 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 
 
-def geocodificar_farmacias(arquivo_entrada, arquivo_saida):
+def geocodificar_farmacias(arquivo_entrada, arquivo_output):
     """Geocode each pharmacy address from an Excel workbook and save coordinates."""
     print(f"Reading file: {arquivo_entrada}")
 
@@ -22,11 +22,11 @@ def geocodificar_farmacias(arquivo_entrada, arquivo_saida):
     # Create a full-address column to improve lookup accuracy.
     # Ideal format: "Street X, District, City - State, Brazil".
     df["Endereco_Busca"] = (
-        df["Endereço"].astype(str)
+        df["EndereÃ§o"].astype(str)
         + ", "
         + df["Bairro"].astype(str)
         + ", "
-        + df["Município"].astype(str)
+        + df["MunicÃ­pio"].astype(str)
         + " - "
         + df["UF"].astype(str)
         + ", Brasil"
@@ -76,17 +76,17 @@ def geocodificar_farmacias(arquivo_entrada, arquivo_saida):
     df = df.drop(columns=["Endereco_Busca"])
 
     # Save the result as an Excel file.
-    with pd.ExcelWriter(arquivo_saida, engine="openpyxl") as writer:
+    with pd.ExcelWriter(arquivo_output, engine="openpyxl") as writer:
         df.to_excel(writer, index=False)
 
-    print(f"\nFinished successfully! Spreadsheet generated: {arquivo_saida}")
+    print(f"\nFinished successfully! Spreadsheet generated: {arquivo_output}")
 
 
 if __name__ == "__main__":
     # Name of the spreadsheet generated in the previous step.
-    ARQUIVO_INPUT = "consolidado_farmacias.xlsx"
+    ARQUIVO_INPUT = "consolidated_pharmacies.xlsx"
 
     # Name of the new spreadsheet that will contain coordinates.
-    ARQUIVO_OUTPUT = "farmacias_com_coordenadas.xlsx"
+    ARQUIVO_OUTPUT = "pharmacies_with_coordinates.xlsx"
 
     geocodificar_farmacias(ARQUIVO_INPUT, ARQUIVO_OUTPUT)

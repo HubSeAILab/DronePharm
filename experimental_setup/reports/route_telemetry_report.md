@@ -1,13 +1,13 @@
-# Executive Telemetry and Route Feasibility Report
+﻿# Executive Telemetry and Route Feasibility Report
 
 ## Overview
-This document is the English markdown version of the PDF report `relatorio_telemetria_rota.pdf`.
+This document is the English markdown version of the PDF report `route_telemetry_report.pdf`.
 It summarizes the telemetry, energy consumption, cost, and route feasibility for the drone mission.
 
 ## Report Metadata
 - Generated at: 2026-06-11 23:47:51
 - Settings file: `settings.json`
-- Route file: `coordenadas.json`
+- Route file: `coordinates.json`
 
 ## Executive Summary
 - Total distance: `34.65 km`

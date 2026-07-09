@@ -1,16 +1,16 @@
-"""Generates a single map comparing the urban route and the drone route.
+﻿"""Generates a single map comparing the urban route and the drone route.
 
 This script does not recalculate routes. It reuses existing results:
-- dados_entrada/relatorio_rota_urbana.json
-- experimental_setup/coordenadas.json
+- input/urban_route_report.json
+- experimental_setup/coordinates.json
 
 Generated outputs:
-- saida/mapa_drone_urbano.html
-- saida/rotas_drone_urbano.geojson
-- saida/resumo_comparativo.json
+- output/drone_urban_map.html
+- output/drone_urban_routes.geojson
+- output/comparative_summary.json
 
 Usage:
-    python gerar_mapa_comparativo.py
+    python generate_comparative_map.py
 """
 
 from __future__ import annotations
@@ -253,7 +253,7 @@ def build_map(urban_result: dict[str, Any], drone_data: dict[str, Any], output_h
         urban_result["geometry"],
         name="Linha urbana",
         style_function=lambda _: {"color": URBAN_COLOR, "weight": 5, "opacity": 0.84},
-        tooltip="Rota urbana sobre ruas",
+        tooltip="Rota urbana sobre streets",
     ).add_to(urban_group)
 
     AntPath(
@@ -334,24 +334,24 @@ def parse_args() -> argparse.Namespace:
     base_dir = Path(__file__).resolve().parent
     project_root = base_dir.parent.parent
     parser = argparse.ArgumentParser(description="Generates a comparative map for the urban route and drone route.")
-    parser.add_argument("--urbana", type=Path, default=base_dir / "dados_entrada" / "relatorio_rota_urbana.json")
-    parser.add_argument("--drone", type=Path, default=project_root / "experimental_setup" / "coordenadas.json")
-    parser.add_argument("--saida", type=Path, default=base_dir / "saida")
+    parser.add_argument("--urbana", type=Path, default=base_dir / "input" / "urban_route_report.json")
+    parser.add_argument("--drone", type=Path, default=project_root / "experimental_setup" / "coordinates.json")
+    parser.add_argument("--output", type=Path, default=base_dir / "output")
     return parser.parse_args()
 
 
 def main() -> None:
     """Run the script workflow from command-line parsing through output generation."""
     args = parse_args()
-    args.saida.mkdir(parents=True, exist_ok=True)
+    args.output.mkdir(parents=True, exist_ok=True)
 
     urban_result = read_json(args.urbana)
     drone_data = read_json(args.drone)
     drone_lonlat = [[wp["longitude"], wp["latitude"]] for wp in drone_data["waypoints_json"]]
 
-    html_path = args.saida / "mapa_drone_urbano.html"
-    geojson_path = args.saida / "rotas_drone_urbano.geojson"
-    summary_path = args.saida / "resumo_comparativo.json"
+    html_path = args.output / "drone_urban_map.html"
+    geojson_path = args.output / "drone_urban_routes.geojson"
+    summary_path = args.output / "comparative_summary.json"
 
     summary = build_map(urban_result, drone_data, html_path)
     geojson = build_geojson(urban_result, drone_data, drone_lonlat)
